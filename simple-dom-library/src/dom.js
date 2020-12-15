@@ -181,12 +181,20 @@ dom.reStyle = function (node, name, value) {
 
 dom.class = {
 
-    // 增加节点class
+    /**
+     * 增加节点的class属性
+     * @param {Object} node 操作节点
+     * @param {String} className 类名
+     */
     add(node, className) {
         node.classList.add(className);
     },
 
-    // 删除节点class
+    /**
+     * 删除节点class
+     * @param {Object} node 操作节点
+     * @param {String} className 需要删除的类名
+     */
     remove(node, className) {
         node.classList.remove(className);
     },
@@ -202,16 +210,33 @@ dom.class = {
 
 };
 
-
+/**
+ * 添加监听node的eventName事件的func函数
+ * @param {Object} node 操作节点
+ * @param {String} eventName 事件名字
+ * @param {Function} func 函数
+ */
 dom.on = function (node, eventName, func) {
     node.addEventListener(eventName, func)
 }
 
+
+/**
+ * 取消监听node的eventName事件的func函数
+ * @param {Object} node 操作节点
+ * @param {String} eventName 事件名字
+ * @param {Function} func 事件函数
+ */
 dom.off = function (node, eventName, func) {
     node.removeEventListener(eventName, func);
 }
 
-// 通过选择器,返回一个node
+/**
+ * 如果说没有指定作用域,那么就在document里面选, 如果给了就在scope里面选
+ * @param {String} selector 选择器, '#xxx'
+ * @param {Object} scope 作用域
+ * @returns {Object} nodeList 选择器选出来的符合条件的伪数组
+ */
 dom.find = function (selector, scope) {
     return (scope || document).querySelectorAll(selector);
 }
@@ -226,13 +251,22 @@ dom.children = function (node) {
     return node.children;
 }
 
-// 返回兄弟元素,
+// 返回兄弟元素
+/**
+ * 返回一个兄弟元素, 将获得的伪数组改成数组,再用filter将自己剔除,然后返回一个数组
+ * @param {Object} node 操作节点
+ */
 dom.sibling = function (node) {
     return Array.from(node.parentNode.children).filter(n => n != node);
 }
 
+/**
+ * 返回当前元素节点的下一个元素节点(element node)
+ * @param {Object} node 操作元素
+ */
 dom.next = function (node) {
     let x = node.nextSibling;
+    // 用来判断是不是文本节点,是的话就再看前面一个
     while (x && x.nodeType === 3) {
         x = x.nextSibling;
     }
@@ -247,6 +281,11 @@ dom.previous = function (node) {
     return x;
 }
 
+/**
+ * 遍历nodelist,然后执行相对的函数操作
+ * @param {Object} nodeList 一个伪数组,包含着一个node的集合
+ * @param {function} fn 函数
+ */
 dom.each = function (nodeList, fn) {
 
     for (let i = 0; i < nodeList.length; i++) {
@@ -254,6 +293,7 @@ dom.each = function (nodeList, fn) {
     }
 
 }
+
 
 dom.index = function (node) {
     const list = dom.children(node.parentNode);
