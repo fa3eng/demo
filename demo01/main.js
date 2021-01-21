@@ -103,8 +103,10 @@ let step = () => {
 
         html.innerHTML = string2;
         style.innerHTML = string.substring(0, n);
+
         window.scrollTo(0, 99999);
         html.scrollTo(0, 99999);
+        
         if (n + 1 < string.length) {
             n = n + 1;
             step();

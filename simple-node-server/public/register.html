@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+</head>
+<body>
+    <h2>注册</h2>
+
+    <form action="POST" id="registerForm">
+        <div>
+            <label>
+                用户名
+                <input type="text" name="name">
+            </label>
+        
+            <label>
+                密码
+                <input type="password" name="password">
+            </label>
+        </div>
+        
+        <div>
+            <button type="submit">注册</button>
+        </div>
+    </form>
+    
+</body>
+
+<script src="../jquery.min.js"></script>
+<script>
+    const $form = $('#registerForm');
+    
+    $form.on('submit',(event) => {
+        // 取消默认事件
+        event.preventDefault();
+        
+        // 获取表单里面的值
+        const name = $form.find('input[name = name]').val();
+        const pwd = $form.find('input[name = password]').val();
+        
+        $.ajax({
+            type: 'POST',
+            url: './register',
+            contentType: 'text/json;charset=utf-8',
+            data: JSON.stringify({"name": name, "password": pwd}),
+        }).then(()=>{
+
+            location.href = '/sign_in.html';
+        }, ()=>{})
+    })
+</script>
+
+</html>
