@@ -32,7 +32,7 @@ class Item extends React.Component{
         return(
             <li style = {{ backgroundColor: highlightState ? '#ddd' : 'white' }} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
                 <label>
-                    <input type="checkbox" defaultChecked={done} onChange={handleChecked(id)}/>
+                    <input type="checkbox" checked={done} onChange={handleChecked(id)}/>
                     <span>{name}</span>
                 </label>
                 <button onClick={this.handleDelete(id)} className="btn btn-danger" style={{display:highlightState ? 'block' : 'none'}}>删除</button>

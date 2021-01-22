@@ -22,7 +22,6 @@ export default class App extends Component {
             })
         });
     }
-
     
     // 得到新的todo标签
     createTodo = (todo) => {
@@ -37,21 +36,39 @@ export default class App extends Component {
         const result =  todos.filter((item) => {
             return item.id !== id;
         })
-        
+
         this.setState({
             todos: result
         })
     }
 
+    checkAllTodo = (done) => {
+        const {todos} = this.state;
+        const newTodos =  todos.map((todoObj) => {
+            return {...todoObj, done:done}
+        })
+        this.setState({todos: newTodos})
+    }
+
+    clearAllDoneTodo = (params) => {
+        const {todos} = this.state;
+
+        const result = todos.filter((todoObj) => {
+            return !todoObj.done;
+        })
+
+        this.setState({todos: result});
+    }
+
     render() {
         const {todos} = this.state;
-        const {createTodo, updateTodo, deleteTodo} = this;
+        const {createTodo, updateTodo, deleteTodo, checkAllTodo, clearAllDoneTodo} = this;
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
                     <Header createTodo = {createTodo} />
                     <List todos = {todos} updateTodo = {updateTodo} deleteTodo={deleteTodo} />
-                    <Footer />
+                    <Footer todos = {todos} checkAllTodo = {checkAllTodo} clearAllDoneTodo = {clearAllDoneTodo} />
                 </div>
             </div>
         )
