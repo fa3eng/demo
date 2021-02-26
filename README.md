@@ -59,6 +59,12 @@ dom.after = function(node, newNode){
 
 预览链接：👉 [点这里！](http://meakle.com/demo/nav-demo/src/index)
 
+### hasa-nav
+
+是的，我用React把这个项目重构了，大致的思路是差不多的，但是细节和功能更加丰富
+
+项目链接：👉 [点这里！](https://github.com/Meakle/hasa-nav)
+
 ## simple-node-server
 
 一个简单的静态服务器。
